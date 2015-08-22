@@ -8,16 +8,21 @@ namespace Autumn\Janken\Domain;
 class PlayerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
+	 * @var RandomNumberGenerator
+	 */
+	private $randomNumberGenerator;
+	/**
 	 * @var Player
 	 */
-	protected $object;
+	protected $SUT;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 */
 	protected function setUp() {
-//		$this->object = new Player;
+		$this->randomNumberGenerator = $this->getMock('Autumn\Janken\Domain\RandomNumberGenerator');
+		$this->SUT = new Player("player 1", $this->randomNumberGenerator);
 	}
 
 	/**
@@ -32,9 +37,8 @@ class PlayerTest extends \PHPUnit_Framework_TestCase {
 	 * @covers Autumn\Janken\Domain\Player::showHand()
 	 */
 	public function testShowHand() {
-		$this->object = new Player("player 1");
 		$expected = Player::STONE;
-		$result = $this->object->showHand();
+		$result = $this->SUT->showHand();
 		$this->assertEquals($expected, $result);
 	}
 
@@ -42,9 +46,8 @@ class PlayerTest extends \PHPUnit_Framework_TestCase {
 	 * @covers Autumn\Janken\Domain\Player::__toString
 	 */
 	public function test__toString() {
-		$this->object = new Player("player 1");
 		$expected = "[player 1]";
-		$result = '' . $this->object;
+		$result = '' . $this->SUT;
 		$this->assertEquals($expected, $result);
 	}
 

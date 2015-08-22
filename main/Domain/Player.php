@@ -4,7 +4,7 @@ namespace Autumn\Janken\Domain;
 /**
  * Description of Player
  *
- * @author Kazuo
+ * @author ka-autumn
  */
 class Player {
 	const STONE = "グー";
@@ -15,9 +15,14 @@ class Player {
 	 * @var string 名前
 	 */
 	private $name;
+	/**
+	 * @var RandomNumberGenerator 乱数生成器
+	 */
+	private $generator;
 
-	public function __construct($name) {
+	public function __construct($name, RandomNumberGenerator $generator) {
 		$this->name = $name;
+		$this->generator = $generator;
 	}
 
 	public function showHand() {
